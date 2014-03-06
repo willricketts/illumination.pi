@@ -1,15 +1,9 @@
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+<% layout('layout') -%>
     <h1><%= title %></h1>
     <p>Let there be light?</p>
-    <a href="/desk" id="desk" class="button">Toggle Desk Lamp</a><br />
-    <a href="/bedroom" id="bedroom" class="button">Toggle Bedroom Lighting</a><br />
-    <a href="/overhead" id="overhead" class="button">Toggle Overhead Lighting</a>
-  </body>
-</html>
+    <div style="display: inline;">
+	    <a href="/desk" id="desk" class="btn btn-lg btn-primary">Toggle Desk Lamp</a>
+	    <a href="/bedroom" id="bedroom" class="btn btn-lg btn-primary">Toggle Bedroom Lighting</a>
+	    <a href="/overhead" id="overhead" class="btn btn-lg btn-primary">Toggle Overhead Lighting</a>
+    </div>
