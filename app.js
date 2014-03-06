@@ -39,14 +39,17 @@ app.get('/status', function(req, res){
 
 app.get('/desk',function(req, res){
 	console.log("Desk lamp toggled");
+	res.redirect("/");
 });
 
 app.get('/bedroom',function(req, res){
 	console.log("Bedroom lighting toggled");
+	res.redirect("/");
 });
 
 app.get('/overhead',function(req, res){
 	console.log("Overhead lighting toggled");
+	res.redirect("/");
 });
 
 
