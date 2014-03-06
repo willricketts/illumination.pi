@@ -33,6 +33,10 @@ app.get('/', function(req, res){
 	res.render('index.ejs', {title: "Lamp Controller"});
 });
 
+app.get('/status', function(req, res){
+	res.render('status.ejs', {title: "Lighting Status"});
+});
+
 app.get('/desk',function(req, res){
 	console.log("Desk lamp toggled");
 });
@@ -44,6 +48,8 @@ app.get('/bedroom',function(req, res){
 app.get('/overhead',function(req, res){
 	console.log("Overhead lighting toggled");
 });
+
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Lighting controller listening on port ' + app.get('port'));
