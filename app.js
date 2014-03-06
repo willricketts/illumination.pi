@@ -29,7 +29,21 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+app.get('/', function(req, res){
+	res.render('index.ejs', {title: "Lamp Controller"});
+});
+
+app.get('/desk',function(req, res){
+	console.log("Desk lamp toggled");
+});
+
+app.get('/bedroom',function(req, res){
+	console.log("Bedroom lighting toggled");
+});
+
+app.get('/overhead',function(req, res){
+	console.log("Overhead lighting toggled");
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Lighting controller listening on port ' + app.get('port'));
