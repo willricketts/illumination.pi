@@ -32,9 +32,19 @@ if ('development' == app.get('env')) {
 }
 
 //STATUS VARIABLES
+var title = "Lighting Control"
 var deskstatus;
+var bedroomstatus;
+var overheadstatus;
 
-app.get('/', routes.index);
+//Render Functions
+function renderIndex(res){
+	res.render('index.ejs',{title: title, deskflash: deskstatus, bedroomflash: bedroomstatus, overheadflash: overheadstatus});
+};
+
+app.get('/', function(req, res){
+	renderIndex(res);
+});
 
 app.get('/status', function(req, res){
 	res.render('status.ejs', {title: "Lighting Status"});
@@ -48,6 +58,7 @@ app.get('/desk',function(req, res){
 				if (err) console.log(err);
 				deskstatus = "off";
 				console.log("Desk lamp toggled off");
+				renderIndex(res);
 			});
 		};
 	}
@@ -58,10 +69,11 @@ app.get('/desk',function(req, res){
 				if (err) console.log(err);
 				deskstatus = "on";
 				console.log("Desk lamp toggled on");
+				renderIndex(res);
 			});
 		};
 	};		
-	res.redirect("/");
+	
 });
 
 app.get('/bedroom',function(req, res){
