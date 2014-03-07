@@ -31,44 +31,37 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+//STATUS VARIABLES
+var deskstatus;
+
 app.get('/', routes.index);
 
 app.get('/status', function(req, res){
 	res.render('status.ejs', {title: "Lighting Status"});
 });
 
-app.get('/desk',function(req, res){
-	function toggledesk(){
-		var status = "off";
-		gpio.setup(18, gpio.DIR_OUT, write);
-		gpio.setup(23, gpio.DIR_OUT, write);
-		
-		if(status == "off"){
-			gpio.destroy(23, function(err){
-				if(err) console.log(err);
-			});
-			function write(){
-				gpio.write(18, true, function(err){
+app.get('/desk',function(req, res){	
+		if(deskstatus == "on"){
+			gpio.setup(23, gpio.DIR_OUT, deskwriteoff);
+			function deskwriteoff(){
+				gpio.write(23, true, function(err){
 					if (err) console.log(err);
-					status = "on";
-					console.log("Desk lamp toggled");
+					deskstatus = "off";
+					console.log("Desk lamp toggled off");
 				});
 			};
 		}
 		else {
-			gpio.destroy(18, function(err){
-				if(err) console.log(err);
-			});
-			function write(){
-				gpio.write(23, true, function(err){
+			gpio.setup(18, gpio.DIR_OUT, deskwrite);
+			function deskwrite(){
+				gpio.write(18, true, function(err){
 					if (err) console.log(err);
-					status = "off";
-					console.log("Desk lamp toggled");	
+					deskstatus = "on";
+					console.log("Desk lamp toggled on");
 				});
 			};
 		};
-	};
-	toggledesk();
+		
 	res.redirect("/");
 });
 
