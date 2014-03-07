@@ -5,8 +5,11 @@ var http = require('http');
 var path = require('path');
 var gpio = require('rpi-gpio');
 var engine = require('ejs-locals');
+var twilio = require('twilio');
+var url = require('url');
 
 var app = express();
+var client = new twilio.RestClient('', '');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -219,6 +222,20 @@ app.get('/overhead',function(req, res){
 				//res.end();
 			});
 		};
+	};
+});
+
+app.get('/sms', function(req, res){
+	var sms = url.parse(req.url, true).query;
+	console.log("SMS RECEIVED: " + sms.Body);
+	
+	switch(content.Body) {
+	case 'toggle bedroom': console.log("toggling bedroom lights");
+		break;
+	case 'toggle overhead': console.log("toggling overhead lights");
+		break;
+	case 'toggle desk': console.log("toggling desk light");
+		break;
 	};
 });
 
