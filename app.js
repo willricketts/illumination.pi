@@ -59,6 +59,7 @@ app.get('/desk',function(req, res){
 				deskstatus = "off";
 				console.log("Desk lamp toggled off");
 				renderIndex(res);
+				res.end();
 			});
 		};
 	}
@@ -70,10 +71,10 @@ app.get('/desk',function(req, res){
 				deskstatus = "on";
 				console.log("Desk lamp toggled on");
 				renderIndex(res);
+				res.end();
 			});
 		};
-	};		
-	
+	};
 });
 
 app.get('/bedroom',function(req, res){
@@ -85,8 +86,6 @@ app.get('/overhead',function(req, res){
 	console.log("Overhead lighting toggled");
 	res.redirect("/");
 });
-
-
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Lighting controller listening on port ' + app.get('port'));
