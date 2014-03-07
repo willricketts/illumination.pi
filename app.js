@@ -105,8 +105,62 @@ app.get('/desk',function(req, res){
 });
 
 app.get('/bedroom',function(req, res){
-	console.log("Bedroom lighting toggled");
-	res.redirect("/");
+	if(bedroomstatus == "on"){
+		gpio.setup(21, gpio.DIR_OUT, bedroomwriteoff);
+		function bedroomwriteoff(){
+			gpio.write(21, true, function(err){
+				if (err) console.log(err);
+				bedroomstatus = "off";
+				console.log("Bedroom lamp toggled off");
+				
+				gpio.setup(21, gpio.DIR_IN, readOffswitchInput);
+
+				function readOffswitchInput() {
+				    gpio.read(21, function(err, value) {
+				        console.log('Offswitch is ' + value);
+				    });
+				};
+				
+				gpio.setup(22, gpio.DIR_IN, readOnswitchInput);
+
+				function readOnswitchInput() {
+				    gpio.read(22, function(err, value) {
+				        console.log('Onswitch is ' + value);
+				    });
+				};
+				renderIndex(res);
+				//res.end();
+			});
+		};
+	}
+	else {
+		gpio.setup(22, gpio.DIR_OUT, bedroomwrite);
+		function bedroomwrite(){
+			gpio.write(22, true, function(err){
+				if (err) console.log(err);
+				bedroomstatus = "on";
+				console.log("Bedroom lamp toggled on");
+				
+				gpio.setup(21, gpio.DIR_IN, readOffswitchInput);
+
+				function readOffswitchInput() {
+				    gpio.read(21, function(err, value) {
+				        console.log('Offswitch is ' + value);
+				    });
+				};
+				
+				gpio.setup(22, gpio.DIR_IN, readOnswitchInput);
+
+				function readOnswitchInput() {
+				    gpio.read(22, function(err, value) {
+				        console.log('Onswitch is ' + value);
+				    });
+				};
+				renderIndex(res);
+				//res.end();
+			});
+		};
+	};
 });
 
 app.get('/overhead',function(req, res){
