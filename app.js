@@ -107,8 +107,6 @@ app.get('/desk',function(req, res){
 			});
 		};
 	};
-	
-	
 });
 
 app.get('/bedroom',function(req, res){
