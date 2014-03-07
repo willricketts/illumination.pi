@@ -37,7 +37,9 @@ function renderIndex(res){
 	res.render('index.ejs',{title: title, deskflash: deskstatus, bedroomflash: bedroomstatus, overheadflash: overheadstatus});
 };
 
-app.get('/', function(req, res){
+
+
+app.get('/', function(req, res){	
 	renderIndex(res);
 });
 
