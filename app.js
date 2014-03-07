@@ -41,27 +41,26 @@ app.get('/status', function(req, res){
 });
 
 app.get('/desk',function(req, res){	
-		if(deskstatus == "on"){
-			gpio.setup(23, gpio.DIR_OUT, deskwriteoff);
-			function deskwriteoff(){
-				gpio.write(23, true, function(err){
-					if (err) console.log(err);
-					deskstatus = "off";
-					console.log("Desk lamp toggled off");
-				});
-			};
-		}
-		else {
-			gpio.setup(18, gpio.DIR_OUT, deskwrite);
-			function deskwrite(){
-				gpio.write(18, true, function(err){
-					if (err) console.log(err);
-					deskstatus = "on";
-					console.log("Desk lamp toggled on");
-				});
-			};
+	if(deskstatus == "on"){
+		gpio.setup(23, gpio.DIR_OUT, deskwriteoff);
+		function deskwriteoff(){
+			gpio.write(23, true, function(err){
+				if (err) console.log(err);
+				deskstatus = "off";
+				console.log("Desk lamp toggled off");
+			});
 		};
-		
+	}
+	else {
+		gpio.setup(18, gpio.DIR_OUT, deskwrite);
+		function deskwrite(){
+			gpio.write(18, true, function(err){
+				if (err) console.log(err);
+				deskstatus = "on";
+				console.log("Desk lamp toggled on");
+			});
+		};
+	};		
 	res.redirect("/");
 });
 
