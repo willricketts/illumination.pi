@@ -38,7 +38,37 @@ app.get('/status', function(req, res){
 });
 
 app.get('/desk',function(req, res){
-	console.log("Desk lamp toggled");
+	function toggledesk(){
+		var status = "off";
+		gpio.setup(18, gpio.DIR_OUT, write);
+		gpio.setup(23, gpio.DIR_OUT, write);
+		
+		if(status == "off"){
+			gpio.destroy(23, function(err){
+				if(err) console.log(err);
+			});
+			function write(){
+				gpio.write(18, true, function(err){
+					if (err) console.log(err);
+					status = "on";
+					console.log("Desk lamp toggled");
+				});
+			};
+		}
+		else {
+			gpio.destroy(18, function(err){
+				if(err) console.log(err);
+			});
+			function write(){
+				gpio.write(23, true, function(err){
+					if (err) console.log(err);
+					status = "off";
+					console.log("Desk lamp toggled");	
+				});
+			};
+		};
+	};
+	toggledesk();
 	res.redirect("/");
 });
 
