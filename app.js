@@ -58,8 +58,24 @@ app.get('/desk',function(req, res){
 				if (err) console.log(err);
 				deskstatus = "off";
 				console.log("Desk lamp toggled off");
+				
+				gpio.setup(23, gpio.DIR_IN, readOffswitchInput);
+
+				function readOffswitchInput() {
+				    gpio.read(23, function(err, value) {
+				        console.log('Offswitch is ' + value);
+				    });
+				};
+				
+				gpio.setup(18, gpio.DIR_IN, readOnswitchInput);
+
+				function readOnswitchInput() {
+				    gpio.read(18, function(err, value) {
+				        console.log('Onswitch is ' + value);
+				    });
+				};
 				renderIndex(res);
-				res.end();
+				//res.end();
 			});
 		};
 	}
@@ -70,11 +86,29 @@ app.get('/desk',function(req, res){
 				if (err) console.log(err);
 				deskstatus = "on";
 				console.log("Desk lamp toggled on");
+				
+				gpio.setup(23, gpio.DIR_IN, readOffswitchInput);
+
+				function readOffswitchInput() {
+				    gpio.read(23, function(err, value) {
+				        console.log('Offswitch is ' + value);
+				    });
+				};
+				
+				gpio.setup(18, gpio.DIR_IN, readOnswitchInput);
+
+				function readOnswitchInput() {
+				    gpio.read(18, function(err, value) {
+				        console.log('Onswitch is ' + value);
+				    });
+				};
 				renderIndex(res);
-				res.end();
+				//res.end();
 			});
 		};
 	};
+	
+	
 });
 
 app.get('/bedroom',function(req, res){
