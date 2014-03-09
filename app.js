@@ -9,6 +9,7 @@ var twilio = require('twilio');
 var url = require('url');
 
 var app = express();
+
 var client = new twilio.RestClient('', '');
 
 // all environments
@@ -61,7 +62,8 @@ app.get('/desk',function(req, res){
 
 				function readOffswitchInput() {
 				    gpio.read(23, function(err, value) {
-				        console.log('Offswitch is ' + value);
+				         if(err) console.log(err);
+					 console.log('Offswitch is ' + value);
 				    });
 				};
 				
@@ -69,12 +71,20 @@ app.get('/desk',function(req, res){
 
 				function readOnswitchInput() {
 				    gpio.read(18, function(err, value) {
+					if(err) console.log(err);
 				        console.log('Onswitch is ' + value);
 				    });
 				};
 				renderIndex(res);
-				//res.end();
+				res.end();
 			});
+            
+            function closePins() {
+                gpio.destroy(function() {
+                    console.log('All pins unexported');
+                    return process.exit(0);
+                });
+            };
 		};
 	}
 	else {
@@ -89,6 +99,7 @@ app.get('/desk',function(req, res){
 
 				function readOffswitchInput() {
 				    gpio.read(23, function(err, value) {
+					if(err) console.log(err);
 				        console.log('Offswitch is ' + value);
 				    });
 				};
@@ -97,12 +108,19 @@ app.get('/desk',function(req, res){
 
 				function readOnswitchInput() {
 				    gpio.read(18, function(err, value) {
+					if (err) console.log(err);
 				        console.log('Onswitch is ' + value);
 				    });
 				};
 				renderIndex(res);
-				//res.end();
+				res.end();
 			});
+            function closePins() {
+                gpio.destroy(function() {
+                    console.log('All pins unexported');
+                    return process.exit(0);
+                });
+            };
 		};
 	};
 });
@@ -134,6 +152,12 @@ app.get('/bedroom',function(req, res){
 				renderIndex(res);
 				//res.end();
 			});
+            function closePins() {
+                gpio.destroy(function() {
+                    console.log('All pins unexported');
+                    return process.exit(0);
+                });
+            };
 		};
 	}
 	else {
@@ -162,6 +186,12 @@ app.get('/bedroom',function(req, res){
 				renderIndex(res);
 				//res.end();
 			});
+            function closePins() {
+                gpio.destroy(function() {
+                    console.log('All pins unexported');
+                    return process.exit(0);
+                });
+            };
 		};
 	};
 });
@@ -193,6 +223,12 @@ app.get('/overhead',function(req, res){
 				renderIndex(res);
 				//res.end();
 			});
+            function closePins() {
+                gpio.destroy(function() {
+                    console.log('All pins unexported');
+                    return process.exit(0);
+                });
+            };
 		};
 	}
 	else {
@@ -221,6 +257,12 @@ app.get('/overhead',function(req, res){
 				renderIndex(res);
 				//res.end();
 			});
+            function closePins() {
+                gpio.destroy(function() {
+                    console.log('All pins unexported');
+                    return process.exit(0);
+                });
+            };
 		};
 	};
 });
