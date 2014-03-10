@@ -10,7 +10,7 @@ var url = require('url');
 
 var app = express();
 
-var client = new twilio.RestClient('', '');
+//var client = new twilio.RestClient('', '');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -267,7 +267,7 @@ app.get('/overhead',function(req, res){
 	};
 });
 
-app.get('/sms', function(req, res){
+/*app.get('/sms', function(req, res){
 	var sms = url.parse(req.url, true).query;
 	console.log("SMS RECEIVED: " + sms.Body);
 	
@@ -279,7 +279,7 @@ app.get('/sms', function(req, res){
 	case 'toggle desk': console.log("toggling desk light");
 		break;
 	};
-});
+});*/
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Lighting controller listening on port ' + app.get('port'));

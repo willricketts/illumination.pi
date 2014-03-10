@@ -12,6 +12,6 @@ Necessary Hardware
 * Raspberry Pi Model-B
 * Woods 13569 Wireless Remote (3-pack)
 * RPi GPIO Ribbon Cable
-* Soldering Iron
+* Soldering Iron and thin-gauge solder
 * 2N2222A Transistors (6)
 * Patience
